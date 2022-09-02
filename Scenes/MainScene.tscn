@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/3D Models/Handgun[Pistol]1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/Scripts/Player.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.785443
+
+[sub_resource type="SphereShape" id=3]
+
+[sub_resource type="SphereShape" id=4]
+radius = 1.00857
+
+[sub_resource type="SpatialMaterial" id=5]
+metallic = 1.0
+metallic_specular = 0.85
+
+[sub_resource type="SpatialMaterial" id=6]
+metallic = 0.78
+
+[sub_resource type="SpatialMaterial" id=7]
+metallic = 0.68
+emission_enabled = true
+emission = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = true
+
+[sub_resource type="SpatialMaterial" id=8]
+metallic = 0.75
+
+[sub_resource type="SpatialMaterial" id=9]
+emission_enabled = true
+emission = Color( 0.372549, 0.372549, 0.372549, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=10]
+emission_enabled = true
+emission = Color( 0.372549, 0.372549, 0.372549, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=11]
+vertex_color_is_srgb = true
+metallic = 1.0
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color( 0.372549, 0.0313726, 0.0313726, 1 )
+emission_energy = 3.9
+emission_operator = 1
+emission_on_uv2 = false
+
+[node name="Spatial" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44082, 7.31623, 7.02736 )
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.015, 0, 0, 0, 1, -5.23316, -4.37968, -1.44248 )
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+transform = Transform( 0.751037, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.188, 0.088, 0 )
+mesh = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.8942e-08, -1.11966, 0, 1.17778, -5.14826e-08, 0.17105, 0.112412, -0.0266266 )
+shape = SubResource( 2 )
+
+[node name="foot" type="CollisionShape" parent="Player"]
+transform = Transform( 0.772145, 0, 0, 0, 1, 0, 0, 0, 1, 0.193905, -0.42796, 0 )
+shape = SubResource( 3 )
+
+[node name="head" type="CollisionShape" parent="Player"]
+transform = Transform( 0.766361, 0, 0, 0, 1, 0, 0, 0, 1, 0.191449, 0.585313, 0 )
+shape = SubResource( 4 )
+
+[node name="Camera" type="Camera" parent="Player/head"]
+transform = Transform( 1.30487, 0, 0, 0, 1, 0, 0, 0, 1, 0.00717417, 0.304867, -0.225415 )
+
+[node name="Handgun" type="MeshInstance" parent="Player/head"]
+transform = Transform( -0.283841, 0.0335189, -0.0349307, 0.0229367, 0.157308, -0.00691195, -0.0421972, -0.00333639, -0.15459, 0.246458, -0.492769, -1.62799 )
+cast_shadow = 2
+extra_cull_margin = 150.31
+use_in_baked_light = true
+lightmap_scale = 2
+mesh = ExtResource( 1 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 5 )
+material/1 = SubResource( 6 )
+material/2 = SubResource( 7 )
+material/3 = SubResource( 8 )
+material/4 = SubResource( 9 )
+material/5 = SubResource( 10 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 8.59636, 0, 0, 0, 1, 0, 0, 0, 12.3039, -3.66972, -7.10467, 0 )
+use_collision = true
+collision_layer = 0
+material = SubResource( 11 )
